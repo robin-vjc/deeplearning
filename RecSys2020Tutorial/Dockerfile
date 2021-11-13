@@ -26,5 +26,5 @@ WORKDIR /dli/task
 # Jupyter listens on 8888.
 EXPOSE 8888
 
-ENTRYPOINT ["/dli/entrypoint.sh"]
+#ENTRYPOINT ["/dli/entrypoint.sh"]
 
