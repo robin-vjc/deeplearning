@@ -7,6 +7,17 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8888:8888
-    command: bash -c "source activate nvtabular && jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --notebook-dir=/dli --allow-root"
+      - 8787:8787
+      - 8786:8786
+#    command: bash -c "source activate nvtabular && jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --notebook-dir=/dli --allow-root && tail -f /dev/null"
+#    command: bash -c "source activate rapids && jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --notebook-dir=/dli --allow-root"
+    command: bash -c "source activate rapids && jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --notebook-dir=/dli --allow-root"
+#    command: tail -f /dev/null
     volumes:
       - ./:/dli
+      - ./:/rapids/notebooks/host
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
